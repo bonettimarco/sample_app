@@ -2,6 +2,7 @@ require "spec_helper"
 
 describe "Static Pages", :type => :feature do
 
+
 	describe "Home Page", :type => :feature do
 		it "deveria ter em h1 Sample App" do
 		visit '/static_pages/home'
