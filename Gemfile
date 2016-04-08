@@ -4,12 +4,16 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
+gem 'bcrypt'
 gem 'bootstrap-sass', '3.2.0.0'
+
+
 # Use sqlite3 as the database for Active Record
 group :development do
 	gem 'sqlite3'
 	gem 'rspec-rails', '2.9.0'
 	gem 'capybara'
+	gem 'annotate'
 end
 
 group :test do
