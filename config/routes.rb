@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get 'help' =>	'static_pages#help'
   get 'about' =>'static_pages#about'
   get 'contact'=>'static_pages#contact'
-
+	resources :users
 #para o teste 1 funcionar....
 #  get 'static_pages/home'
 
