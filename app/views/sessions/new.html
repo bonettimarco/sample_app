@@ -1,0 +1,204 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+
+	typedef struct matriz {
+	int n, m;
+	int **mat;
+} Matriz;
+		// verifica se a memÃ³ria para uma matriz estÃ¡ alocada
+int existeMatriz(Matriz M);
+
+// aloca memÃ³ria para uma matriz de tamanho n por m e preenche ela com zeros
+Matriz criaMatriz(int n, int m);
+
+// desaloca a matriz M da memÃ³ria
+void destroiMatriz(Matriz *M);
+
+// leitura da matriz M
+void leituraMatriz(Matriz *M);
+
+// imprime a matriz M
+void imprimeMatriz(Matriz M);
+
+// soma duas matrizes e retorna o resultado em uma terceira matriz
+Matriz somaMatriz(Matriz A, Matriz B);
+
+// realiza a transporta da matriz M, modificando ela mesma
+void transporMatriz(Matriz *M);
+
+Matriz A, B, C;
+char M;
+
+
+
+int main(void){
+
+	int m, n;
+	int **mat, **p;
+	char comando;
+
+    A.m=A.n=B.m=B.n=C.m=C.n = 0;
+    A.mat=B.mat=C.mat=NULL;
+
+	for(;;){
+         for(;;){
+                fscanf(stdin, "%c", &comando);
+                if(isalpha(comando)) break;
+        }
+		if(comando=='S'){
+            printf("Na saida, o TAD tinha %d %d %p", A.n, A.m, A.mat);
+            if(existeMatriz(A)) destroiMatriz(&A);
+            if(existeMatriz(B)) destroiMatriz(&B);
+
+            exit(0);
+		}
+
+		fscanf(stdin, " %c", &M);
+
+		if(comando=='C') {
+            fscanf(stdin, "%d%d", &n, &m);
+            if(M=='A'){
+                if(existeMatriz(A)) destroiMatriz(&A);
+                A = criaMatriz(n, m);
+            }
+            if(M=='B'){
+                    if (existeMatriz(B)) destroiMatriz(&B);
+            		B = criaMatriz(n, m);
+            }
+		}
+
+
+        if(comando=='L'){
+                printf("Entrou e o valor de M eh %c", M);
+ 			if(M=='A') leituraMatriz(&A);
+            if(M=='B') leituraMatriz(&B);
+        }
+
+        if(comando=='I'){
+            printf("Entrou???");
+            if(M=='A') imprimeMatriz(A);
+            if(M=='B') imprimeMatriz(B);
+
+        }
+
+
+        printf("Testes\n");
+        printf("Foi criada a Matriz %c no endereço %p\n", M, A.mat);
+        printf("A matriz contém os elementos:\n\n");
+        if(A.mat) p = A.mat;
+        for(int i=0; i<A.n; i++){
+            for(int j=0; j<A.m; j++){
+                printf("%d ", **p);
+            }
+        printf("\n");
+        }
+   		comando=' ';
+        m=n=0;
+
+
+	}
+}
+
+int existeMatriz(Matriz M){
+    if(M.mat) return 1;
+    return 0;
+}
+
+Matriz criaMatriz(int ni, int mi){
+
+        int i, j, *Linhas, **Coluna;
+        Matriz retorno;
+
+
+
+        if((Coluna = calloc(ni, sizeof(int)))==NULL){
+        printf("Erro de alocacao - abortando.");
+        exit(1);
+        }
+        retorno.m = mi;
+        retorno.n = ni;
+        retorno.mat = Coluna;
+
+        for(int i=0; i<mi; i++){
+            if((Linhas = calloc((mi)*ni, sizeof(int)))==NULL){
+            printf("Erro de alocacao - abortando.");
+            exit(1);
+            }
+            *Coluna=Linhas;
+            Coluna++;
+        }
+
+        Coluna = retorno.mat;
+        printf("o primeiro endereço disponibilizado por Malloc foi %p", Coluna);
+        printf("O valor ali é de %d\n", *Coluna);
+        printf("O ultimo endereco disponibilizado por Malloc foi%p, Linha", Linhas);
+        printf("O valor ali é de %d\n", *Linhas);
+        printf("Que é a primeira célula da matriz, cujo valor é %d", **Coluna);
+
+
+
+
+printf("o endereço disponibiliado por Malloc foi %p", Linhas);
+printf("o outro endereço disponibiliado por Malloc foi %p", Coluna);
+
+
+        return retorno;
+
+}
+
+void leituraMatriz(Matriz *M){
+
+    int **base = M->mat;
+    int *pon = *base;
+    int aux;
+
+printf("Entrou a leitura?");
+    for(int i=0; i<M->n; i++)
+        for(int j = 0; j<M->m; j++){
+            scanf("%d", &aux);
+            *pon=aux;
+                pon++;
+        }
+
+        return;
+    }
+
+void destroiMatriz(Matriz *M){
+
+        int i, j, *Linha, *Tudo, **Ma;
+
+        Ma=M->mat;
+
+        for(i=0; i<M->n; i++){
+            free(*Ma);
+            printf("o endereço desalocado por Free foi %p\n ", *Ma);
+            Ma++;
+        }
+        Ma=M->mat;
+        free(Ma);
+        printf("o outro endereço desalocado por Free foi %p", Ma);
+
+        M->m=M->n=0;
+        M->mat=NULL;
+        return;
+}
+
+void imprimeMatriz(Matriz M){
+
+    int **pont;
+    pont = M.mat;
+
+    printf("Endereco das colunas eh %p", pont);
+    printf("Endereco das celulas eh %p", *pont);
+    printf("Valor das celulas eh %p", **pont);
+
+
+      for(int i=1; i<M.n; i++){
+            for(int j=1; j<M.m; j++){
+                printf("%d ", pont[i][j]);
+        }
+        printf("\n");
+}
+}

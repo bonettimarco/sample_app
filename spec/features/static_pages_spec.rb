@@ -10,7 +10,7 @@ describe "Static Pages", :type => :feature do
 	end
 
 	describe "Home Page", :type => :feature do
-		before(:each) { visit(toot_path) }
+		before(:each) { visit(root_path) }
 		let(:heading) "Sample App"
 		let(:page_title)
 
