@@ -11,10 +11,10 @@ describe "Static Pages", :type => :feature do
 
 	describe "Home Page", :type => :feature do
 		before(:each) { visit(root_path) }
-		let(:heading) "Sample App"
+		let(:heading) { "Sample App" }
 		let(:page_title)
 
-		it should_behave_like alll "static_pages"
+		it should_behave_like all "static_pages"
 		it should_not have_selector("title", text: "Home"
 		end
 
