@@ -14,6 +14,7 @@ gem 'bootstrap-sass', '3.2.0.0'
 # Use sqlite3 as the database for Active Record
 group :development do
 	gem 'sqlite3'
+	gem 'pg'
 	gem 'rspec-rails', '2.9.0'
 	gem 'capybara'
 	gem 'annotate'
